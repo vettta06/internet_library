@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет-Библиотека</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Интернет-Библиотека</a></h1>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/books">Все книги</a>
+            <a href="/add-book">Добавить книгу</a>
+        </nav>
+    </header>
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>Читайте с удовольствием</p>
+    </footer>
+</body>
+</html>

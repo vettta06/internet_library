@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Информация о книге</h2>
+
+<div style="border: 1px solid #ccc; padding: 20px; margin: 20px 0;">
+    <h3>{{ book.title }}</h3>
+    <p><strong>Автор:</strong> {{ book.author }}</p>
+    <p><strong>Год издания:</strong> {{ book.year }}</p>
+    <p><strong>ID в системе:</strong> {{ book.id }}</p>
+</div>
+
+<div>
+    <a href="/books">← Вернуться к списку книг</a>
+</div>
+{% endblock %}
