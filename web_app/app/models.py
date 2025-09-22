@@ -9,7 +9,7 @@ class Book(Base):
     __tablename__ = "books"
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(200), nullable=False)
-    author = Column(String(100), nulable=False)
+    author = Column(String(100), nullable=False)
     year = Column(Integer)
     description = Column(Text, nullable=True)
     
