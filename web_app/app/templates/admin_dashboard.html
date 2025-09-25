@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Панель управления библиотекой</h2>
+
+<div style="display: flex; gap: 20px; margin: 20px 0;">
+    <div style="border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+        <h3>Книги в библиотеке</h3>
+        <p style="font-size: 24px; font-weight: bold;">{{ total_books }}</p>
+    </div>
+</div>
+
+<div style="margin-top: 30px;">
+    <h3>Быстрые действия</h3>
+    <a href="/books" style="margin-right: 10px;">
+        <button>Управление книгами</button>
+    </a>
+    <a href="/add-book">
+        <button>Добавить книгу</button>
+    </a>
+</div>
+{% endblock %}

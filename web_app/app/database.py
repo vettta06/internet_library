@@ -4,14 +4,13 @@ from sqlalchemy.ext.declarative import declarative_base
 import os
 
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:123@localhost:5432/library_db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./library.db")
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-def create_tables():
-    from . import models
 
+def create_tables():
     Base.metadata.create_all(bind=engine)
 
 
