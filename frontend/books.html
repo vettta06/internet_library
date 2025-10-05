@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Каталог книг</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="header-title">Каталог книг</h1>
+            <p class="header_description">Добро пожаловать в интернет-библиотеку! Здесь вы найдёте более 1000 книг в открытом доступе. Бронируйте и читайте бесплатно!</p>
+            <form class="books_form" action="books.html">
+                <label for="search">Найти книгу по названию, автору, жанру...</label>
+                <input type="text" id="search" name="q" placeholder="Введите запрос...">
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2 clase="page-title">Каталог книг</h2>
+            <div class="filters">
+                <p><strong>Фильтры:</strong>
+                    <a href="#">Фантастика</a>
+                    <a href="#">Классика</a>
+                    <a href="#">Детектив</a>
+                    <a href="#">Поэзия</a>
+                </p>
+            </div>
+            <ul class="books_list">
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Преступление и наказание</h3>
+                        <p class="class_book">Фёдор Достоевский</p>
+                        <p class="date_book">1866</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Мартин Иден</h3>
+                        <p class="class_book">Джек Лондон</p>
+                        <p class="date_book">1908</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Война и мир</h3>
+                        <p class="class_book">Лев Толстой</p>
+                        <p class="date_book">1868</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Обломов</h3>
+                        <p class="class_book">Иван Гончаров</p>
+                        <p class="date_book">1859</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Отцы и дети/h3>
+                        <p class="class_book">Иван Тургенев</p>
+                        <p class="date_book">1862</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Дракула</h3>
+                        <p class="class_book">Брэма Стокера</p>
+                        <p class="date_book">1897</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Вино из одуванчиков</h3>
+                        <p class="class_book">Рэй Брэдбери</p>
+                        <p class="date_book">1957</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Мёртвые души</h3>
+                        <p class="class_book">Николай Гоголь</p>
+                        <p class="date_book">1842</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Евгений Онегин</h3>
+                        <p class="class_book">Александр Пушкин</p>
+                        <p class="date_book">1833</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Герой нашего времени</h3>
+                        <p class="class_book">Михаил Лермонтов</p>
+                        <p class="date_book">1840</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+            </ul>
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">→</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="contacts">
+                <ul class="contact_list">
+                    <li>Email: lib111@gmail.com</li>
+                    <li>Телефон: +7 (123) 456-78-90</li>
+                </ul>
+            </div>
+            <p class="lib_description">Библиотека №111, читайте с удовольствием</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Михаил Булгаков — Интернет-библиотека</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="header-title">Интернет-библиотека</h1>
+            <p class="header_description">Более 1000 книг в открытом доступе</p>
+            <form class="books_form" action="books.html">
+                <label for="search">Поиск по названию, автору или жанру</label>
+                <input type="text" id="search" name="q" placeholder="Введите запрос...">
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2 class="author-name">Михаил Булгаков</h2>
+            <p class="author-bio">
+                Михаил Афанасьевич Булгаков (1891–1940) — русский писатель, драматург, театральный режиссёр.
+                Автор знаменитого романа «Мастер и Маргарита», а также пьес «Дни Турбиных», «Бег» и «Кабала святош».
+                Его творчество сочетает реализм, фантастику и сатиру.
+            </p>
+
+            <h3 class="section-title">Книги автора</h3>
+            <ul class="books_list">
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Мастер и Маргарита</h3>
+                        <p class="class_book">Михаил Булгаков</p>
+                        <p class="date_book">1966</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <li class="books_list_item">
+                    <div class="book-content">
+                        <h3 class="name_book">Собачье сердце</h3>
+                        <p class="class_book">Михаил Булгаков</p>
+                        <p class="date_book">1925</p>
+                    </div>
+                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                </li>
+                <!-- Добавь ещё 2–4 книги -->
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="contacts">
+                <ul class="contact_list">
+                    <li>Email: lib111@gmail.com</li>
+                    <li>Телефон: +7 (123) 456-78-90</li>
+                </ul>
+            </div>
+            <p class="lib_description">Библиотека №111, читайте с удовольствием</p>
+        </div>
+    </footer>
+</body>
+</html>

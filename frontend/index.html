@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Интернет-библиотека</title>
 </head>
 <body>
-    
+    <header>
+        <div class="container">
+            <h1 class="header-title">Интернет-библиотека</h1>
+            <p class="header_description">Добро пожаловать в интернет-библиотеку! Здесь вы найдёте более 1000 книг в открытом доступе. Бронируйте и читайте бесплатно!</p>
+            <form class="books_form" action="books.html">
+                <label for="search">Найти книгу по названию, автору, жанру...</label>
+                <input type="text" id="search" name="q" placeholder="Введите запрос...">
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="new_books">
+                <h2>Новые поступления</h2>
+                <ul class="books_list">
+                    <li class="books_list_item">
+                        <div class="book-content">
+                            <h3 class="name_book">Мастер и Маргарита</h3>
+                            <p class="class_book">Михаил Булгаков</p>
+                            <p class="date_book">1966</p>
+                        </div>
+                        <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                        </li>
+                        <li class="books_list_item">
+                            <div class="book-content">
+                                <h3 class="name_book">1984</h3>
+                                <p class="class_book">Джордж Оруэлл</p>
+                                <p class="date_book">1949</p>
+                            </div>
+                            <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                        </li>
+                    </ul>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="contacts">
+                <ul class="contact_list">
+                    <li>Email: lib111@gmail.com</li>
+                    <li>Телефон: +7 (123) 456-78-90</li>
+                </ul>
+            </div>
+            <p class="lib_description">Библиотека №111, читайте с удовольствием</p>
+        </div>
+    </footer>
 </body>
 </html>

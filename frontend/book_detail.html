@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Мастер и Маргарита — Интернет-библиотека</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="header-title">Интернет-библиотека</h1>
+            <p class="header_description">Более 1000 книг в открытом доступе</p>
+            <form class="books_form" action="books.html">
+                <label for="search">Поиск по названию, автору или жанру</label>
+                <input type="text" id="search" name="q" placeholder="Введите запрос...">
+                <button type="submit">Найти</button>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="book-detail-card">
+                <div class="book-cover-placeholder">📖</div>
+                <div class="book-info">
+                    <h2 class="book-title">Мастер и Маргарита</h2>
+                    <p class="book-author">Автор: <a href="author_detail.html">Михаил Булгаков</a></p>
+                    <p class="book-genre">Жанр: Роман, фантастика, сатира</p>
+                    <p class="book-year">Год: 1966</p>
+                    <p class="book-isbn">ISBN: 978-5-17-071234-5</p>
+                    <p class="book-status"><strong>Статус:</strong> В наличии</p>
+                    <p class="book-description">
+                        Роман о любви, вере, добре и зле, действие которого разворачивается в Москве 1930-х годов.
+                        В центре сюжета — приезд в столицу СССР Воланда и его свиты, а также история Мастера и Маргариты.
+                    </p>
+                    <a href="books.html" class="btn-back">← Назад к каталогу</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="contacts">
+                <ul class="contact_list">
+                    <li>Email: lib111@gmail.com</li>
+                    <li>Телефон: +7 (123) 456-78-90</li>
+                </ul>
+            </div>
+            <p class="lib_description">Библиотека №111, читайте с удовольствием</p>
+        </div>
+    </footer>
+</body>
+</html>
