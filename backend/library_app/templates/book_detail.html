@@ -12,7 +12,7 @@
         <div class="container">
             <h1 class="header-title">Интернет-библиотека</h1>
             <p class="header_description">Более 1000 книг в открытом доступе</p>
-            <form class="books_form" action="books.html">
+            <form class="books_form" action="{% url 'books_list' %}">
                 <label for="search">Поиск по названию, автору или жанру</label>
                 <input type="text" id="search" name="q" placeholder="Введите запрос...">
                 <button type="submit">Найти</button>
@@ -40,7 +40,7 @@
                     <p class="book-description">
                         {{ book.description }}
                     </p>
-                    <a href="books.html" class="btn-back">← Назад к каталогу</a>
+                    <a href="{% url 'books_list' %}" class="btn-back">← Назад к каталогу</a>
                 </div>
             </div>
         </div>

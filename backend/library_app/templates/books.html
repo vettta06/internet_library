@@ -12,8 +12,8 @@
         <div class="container">
             <h1 class="header-title">Каталог книг</h1>
             <p class="header_description">Добро пожаловать в интернет-библиотеку! Здесь вы найдёте более 1000 книг в открытом доступе. Бронируйте и читайте бесплатно!</p>
-            <form class="books_form" action="books.html">
-                <label for="search">Найти книгу по названию, автору, жанру...</label>
+            <form class="books_form" action="{% url 'books_list' %}">
+                    <label for="search">Найти книгу по названию, автору, жанру...</label>
                 <input type="text" id="search" name="q" placeholder="Введите запрос...">
                 <button type="submit">Найти</button>
             </form>
@@ -31,86 +31,18 @@
                 </p>
             </div>
             <ul class="books_list">
+                {% for book in books %}
                 <li class="books_list_item">
                     <div class="book-content">
-                        <h3 class="name_book">Преступление и наказание</h3>
-                        <p class="class_book">Фёдор Достоевский</p>
-                        <p class="date_book">1866</p>
+                        <h3 class="name_book">{{ book.title }}</h3>
+                        <p class="class_book">{{ book.author.name }}</p>
+                        <p class="date_book">{{ book.year }}</p>
                     </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
+                    <a href="{% url 'book_detail' book.id %}" class="btn-more">Подробнее...</a>
                 </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Мартин Иден</h3>
-                        <p class="class_book">Джек Лондон</p>
-                        <p class="date_book">1908</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Война и мир</h3>
-                        <p class="class_book">Лев Толстой</p>
-                        <p class="date_book">1868</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Обломов</h3>
-                        <p class="class_book">Иван Гончаров</p>
-                        <p class="date_book">1859</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Отцы и дети/h3>
-                        <p class="class_book">Иван Тургенев</p>
-                        <p class="date_book">1862</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Дракула</h3>
-                        <p class="class_book">Брэма Стокера</p>
-                        <p class="date_book">1897</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Вино из одуванчиков</h3>
-                        <p class="class_book">Рэй Брэдбери</p>
-                        <p class="date_book">1957</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Мёртвые души</h3>
-                        <p class="class_book">Николай Гоголь</p>
-                        <p class="date_book">1842</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Евгений Онегин</h3>
-                        <p class="class_book">Александр Пушкин</p>
-                        <p class="date_book">1833</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">Герой нашего времени</h3>
-                        <p class="class_book">Михаил Лермонтов</p>
-                        <p class="date_book">1840</p>
-                    </div>
-                    <a href="book_detail.html" class="btn-more">Подробнее...</a>
-                </li>
+                {% empty %}
+                <li>Книг не найдено.</li>
+                {% endfor %}
             </ul>
             <div class="pagination">
                 <a href="#" class="active">1</a>
