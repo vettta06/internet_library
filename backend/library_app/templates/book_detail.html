@@ -25,15 +25,20 @@
             <div class="book-detail-card">
                 <div class="book-cover-placeholder">📖</div>
                 <div class="book-info">
-                    <h2 class="book-title">Мастер и Маргарита</h2>
-                    <p class="book-author">Автор: <a href="author_detail.html">Михаил Булгаков</a></p>
-                    <p class="book-genre">Жанр: Роман, фантастика, сатира</p>
-                    <p class="book-year">Год: 1966</p>
-                    <p class="book-isbn">ISBN: 978-5-17-071234-5</p>
-                    <p class="book-status"><strong>Статус:</strong> В наличии</p>
+                    <h2 class="book-title">{{ book.title }}</h2>
+                    {# <p class="book-author">Автор: <a href="{% url 'author_detail' book.author.id %}">{{ book.author.name }}</a></p> #}                    <p class="book-author">Автор: {{ book.author.name }}</p>
+                    <p class="book-genre">Жанр: {{ book.genre }}</p>
+                    <p class="book-year">Год: {{ book.year }}</p>
+                    <p class="book-isbn">ISBN: {{ book.isbn }}</p>
+                    <p class="book-status"><strong>Статус:</strong> 
+                        {% if book.available %}
+                            <span style="color: #27ae60;">В наличии</span>
+                        {% else %}
+                            <span style="color: #e74c3c;">Выдана</span>
+                        {% endif %}
+                    </p>
                     <p class="book-description">
-                        Роман о любви, вере, добре и зле, действие которого разворачивается в Москве 1930-х годов.
-                        В центре сюжета — приезд в столицу СССР Воланда и его свиты, а также история Мастера и Маргариты.
+                        {{ book.description }}
                     </p>
                     <a href="books.html" class="btn-back">← Назад к каталогу</a>
                 </div>

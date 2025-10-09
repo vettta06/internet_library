@@ -4,7 +4,7 @@ from .models import Book
 
 def index(request):
     books = Book.objects.filter(available=True).order_by('id')[:6]
-    return render(request, 'index.html', {'books' : books})
+    return render(request, 'index.html', {'books': books})
 
 
 def book_detail(request, book_id):

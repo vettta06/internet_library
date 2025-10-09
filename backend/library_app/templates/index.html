@@ -31,7 +31,7 @@
                             <p class="class_book">{{ book.author.name }}</p>
                             <p class="date_book">{{ book.year }}</p>
                         </div>
-                        <!-- <a href="{% url 'book_detail' book.id %}" class="btn-more">Подробнее...</a> */ -->
+                        <a href="{% url 'book_detail' book.id %}" class="btn-more">Подробнее...</a> 
                     </div>
                     {% empty %}
                      <p>Нет доступных книг.</p>
