@@ -3,7 +3,7 @@ from .models import Book
 
 
 def index(request):
-    books = Book.objects.filter(available=True).order_by('id')[:6]
+    books = Book.objects.filter(available=True).order_by('-id')[:3]
     return render(request, 'index.html', {'books': books})
 
 
