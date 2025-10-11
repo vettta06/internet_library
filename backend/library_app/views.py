@@ -16,7 +16,7 @@ def books_list(request):
     query = request.GET.get('q', '')
     if query:
         books = Book.objects.filter(
-            available = True,
+            available=True,
             title__icontains=query
         ).order_by('title')
     else:
