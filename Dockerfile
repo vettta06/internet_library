@@ -10,7 +10,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY backend/ ./backend/
+COPY backend/ ./
 
-EXPOSE 8000
-CMD ["sh", "-c", "cd backend && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"]
+RUN python manage.py collectstatic --noinput
+
+EXPOSE 8001
+EXPOSE 8002
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"]
