@@ -24,10 +24,13 @@
             <h2 clase="page-title">Каталог книг</h2>
             <div class="filters">
                 <p><strong>Фильтры:</strong>
-                    <a href="#">Фантастика</a>
-                    <a href="#">Классика</a>
-                    <a href="#">Детектив</a>
-                    <a href="#">Поэзия</a>
+                    <a href="?" {% if not current_genre_id %}style="font-weight: bold;"{% endif %}>Все</a>
+                    {% for g in genres %}
+                        <a href="?genre={{ g.id }}"
+                        {% if current_genre_id == g.id|stringformat:"s" %}style="font-weight: bold; color: #0a2e5c;"{% endif %}>
+                            {{ g.name }}
+                        </a>
+                    {% endfor %}
                 </p>
             </div>
             <ul class="books_list">

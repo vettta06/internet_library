@@ -13,6 +13,17 @@ class Author(models.Model):
         verbose_name_plural = "Авторы"
 
 
+class Genre(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="Жанр")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Жанры"
+        verbose_name_plural = "Жанры"
+
+
 class Book(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
     author = models.ForeignKey(
@@ -20,7 +31,7 @@ class Book(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Автор"
     )
-    genre = models.CharField(max_length=100, verbose_name="Жанр")
+    genre = models.ManyToManyField(Genre, verbose_name="Жанры")
     year = models.IntegerField(verbose_name="Год издания")
     isbn = models.CharField(max_length=17, unique=True, verbose_name="ISBN")
     description = models.TextField(verbose_name="Описание")

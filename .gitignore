@@ -8,6 +8,8 @@ __pycache__/
 *.pyd
 .Python
 .ipynb_checkpoints
+*.py[cod]
+*$py.class
 
 *.log
 local_settings.py

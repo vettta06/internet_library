@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book
+from .models import Book, Genre
 
 
 def index(request):
@@ -14,11 +14,17 @@ def book_detail(request, book_id):
 
 def books_list(request):
     query = request.GET.get('q', '')
+    genre_id = request.GET.get('genre', '')
+    books = Book.objects.filter(available=True)
     if query:
-        books = Book.objects.filter(
-            available=True,
-            title__icontains=query
-        ).order_by('title')
-    else:
-        books = Book.objects.filter(available=True).order_by('title')
-    return render(request, 'books.html', {'books': books, 'query': query})
+        books = books.filter(title__icontains=query)
+    if genre_id:
+        books = books.filter(genre__id=genre_id.strip())
+    books = books.distinct().order_by('title')
+    genres = Genre.objects.all().order_by('name')
+    return render(request, 'books.html', {
+        'books': books,
+        'genres': genres,
+        'current_genre': genre_id,
+        'query': query,
+    })
