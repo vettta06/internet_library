@@ -32,3 +32,22 @@ class Book(models.Model):
     class Meta:
         verbose_name = "Книга"
         verbose_name_plural = "Книги"
+
+
+class Borrowing(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name="Книга")
+    reader_name = models.CharField(max_length=100, verbose_name="Имя читателя")
+    reader_email = models.EmailField(verbose_name="Почта читателя")
+    borrowed_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата выдачи")
+    returned_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата возврата")
+
+    @property
+    def is_returned(self):
+        return self.returned_at is not None
+    
+    def __str__(self):
+        return f"{self.book.title} -> {self.reader_name}"
+    
+    class Meta:
+        verbose_name = "Выдача книги"
+        verbose_name_plural = "Выдача"
