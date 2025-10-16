@@ -25,4 +25,4 @@ class BorrowingAdmin(admin.ModelAdmin):
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    list_display = ('name', )
+    list_display = ('name',)
