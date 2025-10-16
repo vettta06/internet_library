@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Book, Genre
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
@@ -20,11 +21,19 @@ def books_list(request):
         books = books.filter(title__icontains=query)
     if genre_id:
         books = books.filter(genre__id=genre_id.strip())
-    books = books.distinct().order_by('title')
+    paginator = Paginator(books.distinct().order_by('title'), 12)
+    page_number = request.GET.get('page')
+    try:
+        page_obj = paginator.page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
     genres = Genre.objects.all().order_by('name')
     return render(request, 'books.html', {
         'books': books,
         'genres': genres,
         'current_genre': genre_id,
         'query': query,
+        'page_obj': page_obj,
     })

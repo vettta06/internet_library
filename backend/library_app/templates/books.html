@@ -21,13 +21,13 @@
     </header>
     <main>
         <div class="container">
-            <h2 clase="page-title">Каталог книг</h2>
+            <h2 class="page-title">Каталог книг</h2>
             <div class="filters">
                 <p><strong>Фильтры:</strong>
-                    <a href="?" {% if not current_genre_id %}style="font-weight: bold;"{% endif %}>Все</a>
+                    <a href="?{% if query %}q={{ query }}{% endif %}" {% if not current_genre %}style="font-weight: bold;"{% endif %}>Все</a>
                     {% for g in genres %}
-                        <a href="?genre={{ g.id }}"
-                        {% if current_genre_id == g.id|stringformat:"s" %}style="font-weight: bold; color: #0a2e5c;"{% endif %}>
+                        <a href="?{% if query %}q={{ query }}&{% endif %}genre={{ g.id }}"
+                            {% if current_genre == g.id|stringformat:"s" %}style="font-weight: bold; color: #0a2e5c;"{% endif %}>
                             {{ g.name }}
                         </a>
                     {% endfor %}
@@ -48,10 +48,17 @@
                 {% endfor %}
             </ul>
             <div class="pagination">
-                <a href="#" class="active">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">→</a>
+                {% if page_obj.has_previous %}
+                    <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page=1">&laquo; Первая</a>
+                    <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page={{ page_obj.previous_page_number }}">Назад</a>
+                {% endif %}
+                <span class="current">
+                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page={{ page_obj.next_page_number }}">Вперёд</a>
+                    <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+                {% endif %}
             </div>
         </div>
     </main>
