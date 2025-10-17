@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book, Genre
+from .models import Book, Genre, Borrowing
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -9,14 +9,16 @@ def index(request):
 
 
 def book_detail(request, book_id):
-    book = Book.objects.prefetch_related('genre').get(id=book_id)
+    book = Book.objects.get(id=book_id)
+    active_borrowing = Borrowing.objects.filter(book=book, returned_at__isnull=True).exists()
+    book.available = not active_borrowing
     return render(request, 'book_detail.html', {'book': book})
 
 
 def books_list(request):
     query = request.GET.get('q', '')
     genre_id = request.GET.get('genre', '')
-    books = Book.objects.filter(available=True)
+    books = Book.objects.all()
     if query:
         books = books.filter(title__icontains=query)
     if genre_id:

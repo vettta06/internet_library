@@ -52,6 +52,19 @@ class Borrowing(models.Model):
     borrowed_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата выдачи")
     returned_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата возврата")
 
+    def save(self, *args, **kwargs):
+        if not self.returned_at:
+            self.book.available = False
+        else:
+            self.book.available = True
+        self.book.save()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.book.available = True
+        self.book.save()
+        super().delete(*args, **kwargs)
+
     @property
     def is_returned(self):
         return self.returned_at is not None
