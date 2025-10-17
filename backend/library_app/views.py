@@ -9,7 +9,7 @@ def index(request):
 
 
 def book_detail(request, book_id):
-    book = Book.objects.get(id=book_id)
+    book = Book.objects.prefetch_related('genre').get(id=book_id)
     return render(request, 'book_detail.html', {'book': book})
 
 

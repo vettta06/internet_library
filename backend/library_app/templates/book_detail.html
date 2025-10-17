@@ -27,7 +27,13 @@
                 <div class="book-info">
                     <h2 class="book-title">{{ book.title }}</h2>
                     {# <p class="book-author">Автор: <a href="{% url 'author_detail' book.author.id %}">{{ book.author.name }}</a></p> #}                    <p class="book-author">Автор: {{ book.author.name }}</p>
-                    <p class="book-genre">Жанр: {{ book.genre }}</p>
+                    <p class="book-genre">Жанр:
+                        {% for g in book.genre.all %}
+                            {{ g.name }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Не указан
+                        {% endfor %}
+                    </p>                    
                     <p class="book-year">Год: {{ book.year }}</p>
                     <p class="book-isbn">ISBN: {{ book.isbn }}</p>
                     <p class="book-status"><strong>Статус:</strong> 
