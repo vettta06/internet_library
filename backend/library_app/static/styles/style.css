@@ -306,8 +306,15 @@ footer {
 }
 
 .book-status {
+    color: #2c3539; 
+}
+
+.status-available {
     color: #27ae60;
-    font-weight: bold;
+}
+
+.status-unavailable {
+    color: #e74c3c;
 }
 
 .btn-back {

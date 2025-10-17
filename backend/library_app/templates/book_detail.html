@@ -36,11 +36,12 @@
                     </p>                    
                     <p class="book-year">Год: {{ book.year }}</p>
                     <p class="book-isbn">ISBN: {{ book.isbn }}</p>
-                    <p class="book-status"><strong>Статус:</strong> 
+                    <p class="book-status">
+                        <span>Статус:</span>
                         {% if book.available %}
-                            <span style="color: #27ae60;">В наличии</span>
+                            <span class="status-available">В наличии</span>
                         {% else %}
-                            <span style="color: #e74c3c;">Нет в наличии</span>
+                            <span class="status-unavailable">Нет в наличии</span>
                         {% endif %}
                     </p>
                     <p class="book-description">
