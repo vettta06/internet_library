@@ -18,6 +18,7 @@ services:
       DB_USER: library_user
       DB_PASSWORD: secure_password
     volumes:
+      - ./backend:/app   
       - static_volume:/app/staticfiles
     depends_on:
       - db
@@ -31,10 +32,11 @@ services:
       DB_USER: library_user
       DB_PASSWORD: secure_password
     volumes:
+      - ./backend:/app   
       - static_volume:/app/staticfiles
     depends_on:
       - db
-    command: sh -c "sleep 10 && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8002"
+    command: sh -c "sleep 10 && python manage.py runserver 0.0.0.0:8002"
 
   nginx:
     image: nginx:alpine
