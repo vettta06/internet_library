@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Book, Genre, Borrowing
+from .models import Book, Genre, Borrowing, Author
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -38,4 +38,13 @@ def books_list(request):
         'current_genre': genre_id,
         'query': query,
         'page_obj': page_obj,
+    })
+
+
+def author_detail(request, author_id):
+    author = Author.objects.get(id=author_id)
+    books = Book.objects.filter(author=author, available=True)
+    return render(request, 'author_detail.html', {
+        'author': author,
+        'books': books,
     })
