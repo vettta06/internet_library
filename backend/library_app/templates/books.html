@@ -34,7 +34,7 @@
                 </p>
             </div>
             <ul class="books_list">
-                {% for book in books %}
+                {% for book in page_obj %}
                 <li class="books_list_item">
                     <div class="book-content">
                         <h3 class="name_book">{{ book.title }}</h3>

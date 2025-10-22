@@ -7,7 +7,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-        
+
     class Meta:
         verbose_name = "Автор"
         verbose_name_plural = "Авторы"
@@ -26,11 +26,7 @@ class Genre(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
-    author = models.ForeignKey(
-        Author,
-        on_delete=models.CASCADE,
-        verbose_name="Автор"
-    )
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Автор")
     genre = models.ManyToManyField(Genre, verbose_name="Жанры")
     year = models.IntegerField(verbose_name="Год издания")
     isbn = models.CharField(max_length=17, unique=True, verbose_name="ISBN")
@@ -39,7 +35,7 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         verbose_name = "Книга"
         verbose_name_plural = "Книги"
@@ -50,7 +46,9 @@ class Borrowing(models.Model):
     reader_name = models.CharField(max_length=100, verbose_name="Имя читателя")
     reader_email = models.EmailField(verbose_name="Почта читателя")
     borrowed_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата выдачи")
-    returned_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата возврата")
+    returned_at = models.DateTimeField(
+        null=True, blank=True, verbose_name="Дата возврата"
+    )
 
     def save(self, *args, **kwargs):
         if not self.returned_at:
@@ -68,10 +66,10 @@ class Borrowing(models.Model):
     @property
     def is_returned(self):
         return self.returned_at is not None
-    
+
     def __str__(self):
         return f"{self.book.title} -> {self.reader_name}"
-    
+
     class Meta:
         verbose_name = "Выдача книги"
         verbose_name_plural = "Выдача"

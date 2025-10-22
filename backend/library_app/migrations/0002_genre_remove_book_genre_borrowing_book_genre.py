@@ -7,43 +7,83 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('library_app', '0001_initial'),
+        ("library_app", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Genre',
+            name="Genre",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True, verbose_name='Жанр')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=100, unique=True, verbose_name="Жанр"),
+                ),
             ],
             options={
-                'verbose_name': 'Жанры',
-                'verbose_name_plural': 'Жанры',
+                "verbose_name": "Жанры",
+                "verbose_name_plural": "Жанры",
             },
         ),
         migrations.RemoveField(
-            model_name='book',
-            name='genre',
+            model_name="book",
+            name="genre",
         ),
         migrations.CreateModel(
-            name='Borrowing',
+            name="Borrowing",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('reader_name', models.CharField(max_length=100, verbose_name='Имя читателя')),
-                ('reader_email', models.EmailField(max_length=254, verbose_name='Почта читателя')),
-                ('borrowed_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата выдачи')),
-                ('returned_at', models.DateTimeField(blank=True, null=True, verbose_name='Дата возврата')),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='library_app.book', verbose_name='Книга')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "reader_name",
+                    models.CharField(max_length=100, verbose_name="Имя читателя"),
+                ),
+                (
+                    "reader_email",
+                    models.EmailField(max_length=254, verbose_name="Почта читателя"),
+                ),
+                (
+                    "borrowed_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="Дата выдачи"),
+                ),
+                (
+                    "returned_at",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="Дата возврата"
+                    ),
+                ),
+                (
+                    "book",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="library_app.book",
+                        verbose_name="Книга",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Выдача книги',
-                'verbose_name_plural': 'Выдача',
+                "verbose_name": "Выдача книги",
+                "verbose_name_plural": "Выдача",
             },
         ),
         migrations.AddField(
-            model_name='book',
-            name='genre',
-            field=models.ManyToManyField(to='library_app.genre', verbose_name='Жанры'),
+            model_name="book",
+            name="genre",
+            field=models.ManyToManyField(to="library_app.genre", verbose_name="Жанры"),
         ),
     ]

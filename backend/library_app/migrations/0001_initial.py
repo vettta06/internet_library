@@ -8,37 +8,65 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Author',
+            name="Author",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Имя автора')),
-                ('bio', models.TextField(blank=True, verbose_name='Биография')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Имя автора")),
+                ("bio", models.TextField(blank=True, verbose_name="Биография")),
             ],
             options={
-                'verbose_name': 'Автор',
-                'verbose_name_plural': 'Авторы',
+                "verbose_name": "Автор",
+                "verbose_name_plural": "Авторы",
             },
         ),
         migrations.CreateModel(
-            name='Book',
+            name="Book",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200, verbose_name='Название')),
-                ('genre', models.CharField(max_length=100, verbose_name='Жанр')),
-                ('year', models.IntegerField(verbose_name='Год издания')),
-                ('isbn', models.CharField(max_length=17, unique=True, verbose_name='ISBN')),
-                ('description', models.TextField(verbose_name='Описание')),
-                ('available', models.BooleanField(default=True, verbose_name='Доступна')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='library_app.author', verbose_name='Автор')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200, verbose_name="Название")),
+                ("genre", models.CharField(max_length=100, verbose_name="Жанр")),
+                ("year", models.IntegerField(verbose_name="Год издания")),
+                (
+                    "isbn",
+                    models.CharField(max_length=17, unique=True, verbose_name="ISBN"),
+                ),
+                ("description", models.TextField(verbose_name="Описание")),
+                (
+                    "available",
+                    models.BooleanField(default=True, verbose_name="Доступна"),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="library_app.author",
+                        verbose_name="Автор",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Книга',
-                'verbose_name_plural': 'Книги',
+                "verbose_name": "Книга",
+                "verbose_name_plural": "Книги",
             },
         ),
     ]
