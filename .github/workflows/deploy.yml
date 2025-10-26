@@ -59,7 +59,9 @@ jobs:
         SECRET_KEY: test-secret-key-123
         
     - name: Run tests
-      run: cd backend && python manage.py test
+      run: |
+        cd backend
+        python manage.py test
       env:
         DB_HOST: localhost
         DB_NAME: test_db
