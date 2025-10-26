@@ -143,8 +143,9 @@ STATIC_ROOT = "/app/staticfiles/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-if 'RENDER' in os.environ:
+if 'DATABASE_URL' in os.environ:
     DATABASES['default'] = dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
         conn_max_age=600,
         ssl_require=True
     )
@@ -155,3 +156,4 @@ if 'RENDER' in os.environ:
     RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
     if RENDER_EXTERNAL_HOSTNAME:
         ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+        CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')

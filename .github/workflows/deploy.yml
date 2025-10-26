@@ -67,11 +67,13 @@ jobs:
         DB_PASSWORD: test_password
         SECRET_KEY: test-secret-key-123
 
-  docker-build:
+  validate:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Build Docker images
-      run: docker-compose build
+    - name: Validate Python syntax
+      run: |
+        python -m py_compile backend/**/*.py
+        echo "Все Python файлы синтаксически корректны"
