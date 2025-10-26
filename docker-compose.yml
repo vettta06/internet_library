@@ -48,7 +48,13 @@ services:
     depends_on:
       - web1
       - web2
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - redis_data:/data
 
 volumes:
   postgres_data:
   static_volume:
+  redis_data:

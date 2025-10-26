@@ -33,33 +33,34 @@
                     {% endfor %}
                 </p>
             </div>
-            <ul class="books_list">
-                {% for book in page_obj %}
-                <li class="books_list_item">
-                    <div class="book-content">
-                        <h3 class="name_book">{{ book.title }}</h3>
-                        <p class="class_book">{{ book.author.name }}</p>
-                        <p class="date_book">{{ book.year }}</p>
-                    </div>
-                    <a href="{% url 'book_detail' book.id %}" class="btn-more">Подробнее...</a>
-                </li>
-                {% empty %}
-                <li>Книг не найдено.</li>
-                {% endfor %}
-            </ul>
+           {% load cache %}
+             {% cache 600 books_list_cache query current_genre %}
+                <ul class="books_list">
+                    {% for book in books %}
+                    <li class="books_list_item">
+                        <div class="book-content">
+                            <h3 class="name_book">{{ book.title }}</h3>
+                            <p class="class_book">{{ book.author.name }}</p>
+                            <p class="date_book">{{ book.year }}</p>
+                        </div>
+                        <a href="{% url 'book_detail' book.id %}" class="btn-more">Подробнее...</a>
+                    </li>
+                    {% empty %}
+                    <li>Книг не найдено.</li>
+                    {% endfor %}
+                </ul>
             <div class="pagination">
                 {% if page_obj.has_previous %}
                     <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page=1">&laquo; Первая</a>
                     <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page={{ page_obj.previous_page_number }}">Назад</a>
                 {% endif %}
-                <span class="current">
-                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-                </span>
+                <span>Стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
                 {% if page_obj.has_next %}
                     <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page={{ page_obj.next_page_number }}">Вперёд</a>
                     <a href="?{% if query %}q={{ query }}&{% endif %}{% if current_genre %}genre={{ current_genre }}&{% endif %}page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
                 {% endif %}
             </div>
+        {% endcache %}
         </div>
     </main>
     <footer>
