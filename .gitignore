@@ -36,3 +36,5 @@ media/
 backup_new.sql
 .sql
 split_sql.py
+admin_user_correct.sql
+backup.sql

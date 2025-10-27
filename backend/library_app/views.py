@@ -5,7 +5,7 @@ from .models import Author, Book, Borrowing, Genre
 
 
 def index(request):
-    books = Book.objects.filter(available=True).order_by("-id")[:3]
+    books = Book.objects.filter(available=True).order_by("-id")[:4]
     return render(request, "index.html", {"books": books})
 
 

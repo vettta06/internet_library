@@ -22,6 +22,7 @@
     <main>
         <div class="container">
             <h2 class="page-title">Каталог книг</h2>
+            <a href="{% url 'index' %}" class="btn-catalog">← На главную</a>
             <div class="filters">
                 <p><strong>Фильтры:</strong>
                     <a href="?{% if query %}q={{ query }}{% endif %}" {% if not current_genre %}style="font-weight: bold;"{% endif %}>Все</a>
