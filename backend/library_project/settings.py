@@ -157,3 +157,6 @@ if 'DATABASE_URL' in os.environ:
     if RENDER_EXTERNAL_HOSTNAME:
         ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
         CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
+    
+    if 'REDIS_URL' in os.environ:
+        CACHES['default']['LOCATION'] = os.environ['REDIS_URL']
