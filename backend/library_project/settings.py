@@ -55,6 +55,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 CACHES = {
@@ -160,3 +161,5 @@ if 'DATABASE_URL' in os.environ:
     
     if 'REDIS_URL' in os.environ:
         CACHES['default']['LOCATION'] = os.environ['REDIS_URL']
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
