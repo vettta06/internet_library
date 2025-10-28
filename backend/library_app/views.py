@@ -1,5 +1,7 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
+from django.db.models import Q
+from django.http import JsonResponse
 
 from .models import Author, Book, Borrowing, Genre
 
@@ -59,3 +61,19 @@ def author_detail(request, author_id):
             "books": books,
         },
     )
+
+
+def autocomplete(request):
+    query = request.GET.get('q', '')
+    res = []
+    if query:
+        books = Book.objects.filter(
+            Q(title__icontains=query)
+        )[:5]
+        for book in books:
+            res.append({
+                'title': book.title,
+                'author': book.author.name,
+                'type': 'книга'
+            })
+    return JsonResponse(res, safe=False)

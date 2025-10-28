@@ -14,8 +14,21 @@
             <p class="header_description">Добро пожаловать в интернет-библиотеку! Здесь вы найдёте более 1000 книг в открытом доступе. Бронируйте и читайте бесплатно!</p>
             <form class="books_form" action="{% url 'books_list' %}">
                     <label for="search">Найти книгу по названию, автору, жанру...</label>
-                <input type="text" id="search" name="q" placeholder="Введите запрос...">
-                <button type="submit">Найти</button>
+                <div class="search-container">
+                    <div class="input-with-suggestions">
+                        <div class="search-input-group">
+                            <input
+                                type="text"
+                                id="search"
+                                name="q"
+                                placeholder="Введите запрос..."
+                                autocomplete="off"
+                            />
+                            <button type="submit">Найти</button>
+                        </div>
+                        <div class="suggestions" id="suggestions"></div>
+                    </div>
+                </div>
             </form>
         </div>
     </header>
@@ -76,5 +89,6 @@
             <p class="lib_description">Библиотека №111, читайте с удовольствием</p>
         </div>
     </footer>
+    <script src="{% static 'js/autocomplete.js' %}"></script>
 </body>
 </html>
