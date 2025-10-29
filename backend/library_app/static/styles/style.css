@@ -23,6 +23,7 @@ header {
   padding: 1.5rem 0;
   color: #f0e6d2;
   border-bottom: 2px solid #1a3f6d;
+  position: relative;
 }
 
 .header-title {
@@ -466,3 +467,76 @@ footer {
     font-style: italic;
 }
 
+/* Стили для кнопки кабинета библиотекаря */
+.librarian-access {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.librarian-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: #f0e6d2;
+    min-width: 80px;
+}
+
+.librarian-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.librarian-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+.librarian-text {
+    font-size: 0.8rem;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.2;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .librarian-access {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .librarian-btn {
+        padding: 8px 12px;
+        min-width: 70px;
+    }
+    
+    .librarian-text {
+        font-size: 0.7rem;
+    }
+    
+    .librarian-icon {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .librarian-text {
+        display: none; /* Скрываем текст на очень маленьких экранах */
+    }
+    
+    .librarian-btn {
+        padding: 10px;
+        min-width: 50px;
+    }
+}

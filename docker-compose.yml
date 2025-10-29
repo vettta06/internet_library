@@ -27,13 +27,14 @@ services:
     command: >
       sh -c "python manage.py migrate --noinput &&
              python manage.py collectstatic --noinput &&
-             gunicorn --bind 0.0.0.0:8001 library_project.wsgi:application"
+             gunicorn --bind 0.0.0.0:8001 --reload library_project.wsgi:application"
     networks:
       - library-network
     ports:
       - "8001:8001"
     volumes:
       - static_volume:/app/staticfiles
+      - ./backend:/app
 
   web2:
     build: 
@@ -49,13 +50,14 @@ services:
       - db
     command: >
       sh -c "python manage.py migrate --noinput &&
-             gunicorn --bind 0.0.0.0:8002 library_project.wsgi:application"
+             gunicorn --bind 0.0.0.0:8002 --reload library_project.wsgi:application"
     networks:
       - library-network
     ports:
       - "8002:8002"
     volumes:
       - static_volume:/app/staticfiles
+      - ./backend:/app
 
   nginx:
     image: nginx:alpine
