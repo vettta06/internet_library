@@ -153,15 +153,3 @@ STATIC_ROOT = "/app/staticfiles/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-os.environ.pop('CSRF_TRUSTED_ORIGINS', None)
-os.environ.pop('RENDER_EXTERNAL_HOSTNAME', None)
-
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://localhost:8001',
-    'http://localhost:8002',
-    'http://127.0.0.1:8000',
-    'http://127.0.0.1:8001',
-    'http://127.0.0.1:8002',
-]
