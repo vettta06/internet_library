@@ -1,0 +1,45 @@
+# render.yaml
+services:
+  - type: web
+    name: library-web
+    env: docker
+    docker:
+      image: vetttta06/library-web:latest
+    plan: free
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: library-db
+          property: host
+      - key: DB_NAME
+        fromDatabase:
+          name: library-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: library-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: library-db
+          property: password
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: library-redis
+          property: connectionString
+
+  - type: redis
+    name: library-redis
+    plan: free
+    ipAllowList: []  
+
+  - type: database
+    name: library-db
+    databaseName: library_db
+    user: library_user
+    plan: free
