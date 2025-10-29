@@ -2,7 +2,7 @@ name: CI/CD to Docker Hub
 
 on:
   push:
-    branches: [docker-hub-deployment]
+    branches: [main, docker-hub-deployment, render-deployment]
 
 jobs:
   test:
