@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,10 +29,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
 
+SILENCED_SYSTEM_CHECKS = ['4_0.E001']
+
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "https://internet-library.onrender.com/",
+    'http://localhost:8000',
+    'http://localhost:8001', 
+    'http://localhost:8002',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:8001',
+    'http://127.0.0.1:8002',
 ]
 
 
@@ -54,7 +58,6 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -145,21 +148,14 @@ STATIC_ROOT = "/app/staticfiles/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+os.environ.pop('CSRF_TRUSTED_ORIGINS', None)
+os.environ.pop('RENDER_EXTERNAL_HOSTNAME', None)
 
-if "DATABASE_URL" in os.environ:
-    DATABASES["default"] = dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"), conn_max_age=600, ssl_require=True
-    )
-
-    DEBUG = False
-    SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-key-for-render")
-
-    RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-    if RENDER_EXTERNAL_HOSTNAME:
-        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-        CSRF_TRUSTED_ORIGINS.append(f"https://{RENDER_EXTERNAL_HOSTNAME}")
-
-    if "REDIS_URL" in os.environ:
-        CACHES["default"]["LOCATION"] = os.environ["REDIS_URL"]
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://localhost:8001',
+    'http://localhost:8002',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:8001',
+    'http://127.0.0.1:8002',
+]

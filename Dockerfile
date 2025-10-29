@@ -10,10 +10,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY backend/ ./
+COPY backend/ .
 
-RUN python manage.py collectstatic --noinput
+RUN mkdir -p staticfiles
 
-EXPOSE 8001
-EXPOSE 8002
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"]
+EXPOSE 8000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "library_project.wsgi:application"]
