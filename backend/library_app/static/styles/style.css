@@ -532,7 +532,7 @@ footer {
 
 @media (max-width: 480px) {
     .librarian-text {
-        display: none; /* Скрываем текст на очень маленьких экранах */
+        display: none; 
     }
     
     .librarian-btn {

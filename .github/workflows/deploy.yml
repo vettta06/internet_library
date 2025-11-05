@@ -116,3 +116,4 @@ jobs:
           echo "Образы успешно загружены в Docker Hub!"
           echo "Для развертывания выполните на сервере:"
           echo "docker-compose pull && docker-compose up -d"
+
