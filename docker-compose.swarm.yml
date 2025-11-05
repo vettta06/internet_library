@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: library_db
+      POSTGRES_USER: library_user
+      POSTGRES_PASSWORD: secure_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - library-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
+
+  web:
+    image: localhost:5000/library-web:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: db
+      DB_NAME: library_db
+      DB_USER: library_user
+      DB_PASSWORD: secure_password
+      SECRET_KEY: "django-insecure-ra+$$gw#tqc#=5bcd+fj34mvf50y8xqr!k2&nd5o^!vo-d66$$ar"
+      PORT: 8000
+    networks:
+      - library-network
+    volumes:
+      - static_volume:/app/staticfiles
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+  nginx:
+    image: localhost:5000/library-nginx:latest
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - library-network
+    volumes:
+      - static_volume:/app/staticfiles
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - web
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - library-network
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  postgres_data:
+  redis_data:
+  static_volume:
+
+networks:
+  library-network:
+    driver: overlay
+    attachable: true
