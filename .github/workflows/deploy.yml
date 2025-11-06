@@ -2,7 +2,7 @@ name: CI/CD to Docker Hub
 
 on:
   push:
-    branches: [main, docker-hub-deployment, render-deployment]
+    branches: [main, docker-hub-deployment, render-deployment, swarm]
 
 jobs:
   test:
@@ -107,13 +107,47 @@ jobs:
         echo "Web image: ${{ secrets.DOCKERHUB_USERNAME }}/library-web:latest"
         echo "Nginx image: ${{ secrets.DOCKERHUB_USERNAME }}/library-nginx:latest"
         
-  deploy:
+  deploy-test:
     runs-on: ubuntu-latest
     needs: build-and-push
+    if: github.ref == 'refs/heads/docker-hub-deployment'
     steps:
-      - name: Deploy to production
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pull images from Docker Hub
         run: |
-          echo "Образы успешно загружены в Docker Hub!"
-          echo "Для развертывания выполните на сервере:"
-          echo "docker-compose pull && docker-compose up -d"
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/library-web:latest
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/library-nginx:latest
+
+      - name: Run deployment test with docker-compose
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: |
+          # Подставляем образы из Docker Hub в docker-compose.yml
+          sed -i "s|image:.*|image: $DOCKERHUB_USERNAME/library-web:latest|" docker-compose.yml
+          sed -i "s|image: nginx:alpine|image: $DOCKERHUB_USERNAME/library-nginx:latest|" docker-compose.yml
+
+          docker-compose up -d
+          sleep 15
+
+          # Проверяем, что nginx запущен
+          if [ -z "$(docker ps -q -f name=my_lib_nginx_1)" ]; then
+            echo "nginx container is not running"
+            docker-compose logs nginx
+            docker-compose down --volumes
+            exit 1
+          fi
+
+          # Проверяем HTTP-ответ
+          if ! curl -f --max-time 10 http://localhost:8000; then
+            echo "HTTP endpoint not accessible"
+            docker-compose logs nginx
+            docker-compose logs web1
+            docker-compose down --volumes
+            exit 1
+          fi
+
+          echo "Deployment test passed!"
+          docker-compose down --volumes
 
