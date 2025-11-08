@@ -19,10 +19,7 @@ services:
         constraints: [node.role == manager]
 
   web:
-    image: localhost:5000/library-web:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: vetttta06/library-web:latest
     environment:
       DB_HOST: db
       DB_NAME: library_db
@@ -40,10 +37,7 @@ services:
         condition: on-failure
 
   nginx:
-    image: localhost:5000/library-nginx:latest
-    build:
-      context: ./docker/nginx
-      dockerfile: Dockerfile
+    image: vetttta06/library-nginx:latest
     ports:
       - "80:80"
     networks:
