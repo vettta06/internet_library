@@ -64,8 +64,14 @@ services:
 
 volumes:
   postgres_data:
+    external: true
+    name: library_postgres_data
   redis_data:
+    external: true
+    name: library_redis_data
   static_volume:
+    external: true
+    name: library_static_volume
 
 networks:
   library-network:

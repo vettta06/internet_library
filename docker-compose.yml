@@ -84,8 +84,11 @@ services:
 
 volumes:
   postgres_data:
+    name: library_postgres_data
   redis_data:
+    name: library_redis_data
   static_volume:
+    name: library_static_volume
 
 networks:
   library-network:
