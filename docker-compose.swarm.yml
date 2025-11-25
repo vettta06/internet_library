@@ -61,6 +61,30 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+  
+  metabase:
+    image: metabase/metabase:latest
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: library_db
+      MB_DB_HOST: db
+      MB_DB_PORT: 5432
+      MB_DB_USER: library_user
+      MB_DB_PASS: secure_password
+      MB_SITE_NAME: "Library Analytics"
+      MB_ANONYMOUS_TRACKING_ENABLED: "false"
+    networks:
+      - library-network
+    volumes:
+      - metabase_data:/metabase-data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.metabase.rule=Host(`localhost`) && PathPrefix(`/analytics/`)"
+        - "traefik.http.services.metabase.loadbalancer.server.port=3000"
 
 volumes:
   postgres_data:
@@ -72,6 +96,9 @@ volumes:
   static_volume:
     external: true
     name: library_static_volume
+  metabase_data:
+    external: true
+    name: library_metabase_data
 
 networks:
   library-network:
