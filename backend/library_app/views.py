@@ -2,10 +2,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 from django.db.models import Q
 from django.http import JsonResponse
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
 
 from .models import Author, Book, Borrowing, Genre
 
@@ -16,6 +12,7 @@ def index(request):
 
 
 def book_detail(request, book_id):
+    """Описание книги."""
     book = Book.objects.get(id=book_id)
     active_borrowing = Borrowing.objects.filter(
         book=book, returned_at__isnull=True
@@ -25,6 +22,7 @@ def book_detail(request, book_id):
 
 
 def books_list(request):
+    """Список книг."""
     query = request.GET.get("q", "")
     genre_id = request.GET.get("genre", "")
     books = Book.objects.all()
@@ -55,6 +53,7 @@ def books_list(request):
 
 
 def author_detail(request, author_id):
+    """Описание автора."""
     author = Author.objects.get(id=author_id)
     books = Book.objects.filter(author=author, available=True)
     return render(
@@ -68,16 +67,13 @@ def author_detail(request, author_id):
 
 
 def autocomplete(request):
-    query = request.GET.get('q', '')
+    """Автодополнение в поиске."""
+    query = request.GET.get("q", "")
     res = []
     if query:
-        books = Book.objects.filter(
-            Q(title__icontains=query)
-        )[:5]
+        books = Book.objects.filter(Q(title__icontains=query))[:5]
         for book in books:
-            res.append({
-                'title': book.title,
-                'author': book.author.name,
-                'type': 'книга'
-            })
+            res.append(
+                {"title": book.title, "author": book.author.name, "type": "книга"}
+            )
     return JsonResponse(res, safe=False)

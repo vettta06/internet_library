@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Author(models.Model):
+    """Модель данных Автор."""
+
     name = models.CharField(max_length=100, verbose_name="Имя автора")
     bio = models.TextField(blank=True, verbose_name="Биография")
 
@@ -14,6 +16,8 @@ class Author(models.Model):
 
 
 class Genre(models.Model):
+    """Модель данных Жанр."""
+
     name = models.CharField(max_length=100, unique=True, verbose_name="Жанр")
 
     def __str__(self):
@@ -25,8 +29,12 @@ class Genre(models.Model):
 
 
 class Book(models.Model):
+    """Модель данных Книга."""
+
     title = models.CharField(max_length=200, verbose_name="Название")
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Автор")
+    author = models.ForeignKey(
+        Author, on_delete=models.CASCADE, verbose_name="Автор"
+        )
     genre = models.ManyToManyField(Genre, verbose_name="Жанры")
     year = models.IntegerField(verbose_name="Год издания")
     isbn = models.CharField(max_length=17, unique=True, verbose_name="ISBN")
@@ -42,15 +50,22 @@ class Book(models.Model):
 
 
 class Borrowing(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name="Книга")
+    """Модель данных для выдачи книг."""
+
+    book = models.ForeignKey(
+        Book, on_delete=models.CASCADE, verbose_name="Книга"
+    )
     reader_name = models.CharField(max_length=100, verbose_name="Имя читателя")
     reader_email = models.EmailField(verbose_name="Почта читателя")
-    borrowed_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата выдачи")
+    borrowed_at = models.DateTimeField(
+        auto_now_add=True, verbose_name="Дата выдачи"
+    )
     returned_at = models.DateTimeField(
         null=True, blank=True, verbose_name="Дата возврата"
     )
 
     def save(self, *args, **kwargs):
+        """Метод для сохранения книги."""
         if not self.returned_at:
             self.book.available = False
         else:
@@ -59,12 +74,14 @@ class Borrowing(models.Model):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
+        """Метод для удаления книги."""
         self.book.available = True
         self.book.save()
         super().delete(*args, **kwargs)
 
     @property
     def is_returned(self):
+        """Метод для проверки статуса книги."""
         return self.returned_at is not None
 
     def __str__(self):
